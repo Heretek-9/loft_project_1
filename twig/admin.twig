@@ -1,0 +1,87 @@
+<h2>Пользователи</h2>
+<table>
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>email</th>
+			<th>Имя</th>
+			<th>Телефон</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for user in users %}
+			<tr>
+				<td>{{ user.id }}</td>
+				<td>{{ user.email }}</td>
+				<td>{{ user.name }}</td>
+				<td>{{ user.phone }}</td>
+			</tr>
+    	{% else %}
+	    	<tr>
+				<td colspan="4" style="text-align: center;">Пока нет пользователей</td>
+			</tr>
+    	{% endfor %}
+	</tbody>
+</table>
+
+<br><hr><br>
+
+<h2>Заказы</h2>
+<table>
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>id пользователя</th>
+			<th>Улица</th>
+			<th>Дом</th>
+			<th>Корпус</th>
+			<th>Квартира</th>
+			<th>Этаж</th>
+			<th>Комментарий</th>
+			<th>Потребуется сдача</th>
+			<th>Оплата по карте</th>
+			<th>Перезвонить</th>
+			<th>Дата</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for order in orders %}
+			<tr>
+				<td>{{ order.id }}</td>
+				<td>{{ order.user_id }}</td>
+				<td>{{ order.street }}</td>
+				<td>{{ order.house }}</td>
+				<td>{{ order.building }}</td>
+				<td>{{ order.appartment }}</td>
+				<td>{{ order.floor }}</td>
+				<td>{{ order.comment }}</td>
+				<td>
+					{% if order.need_change %}
+						Да
+					{% else %}
+						Нет
+					{% endif %}
+				</td>
+				<td>
+					{% if order.pay_by_card %}
+						Да
+					{% else %}
+						Нет
+					{% endif %}
+				</td>
+				<td>
+					{% if order.call_back %}
+						Да
+					{% else %}
+						Нет
+					{% endif %}
+				</td>
+				<td>{{ order.date|date("d.m.Y H:i:s") }}</td>
+			</tr>
+    	{% else %}
+	    	<tr>
+				<td colspan="12" style="text-align: center;">Пока нет заказов</td>
+			</tr>
+    	{% endfor %}
+	</tbody>
+</table>

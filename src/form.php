@@ -21,6 +21,21 @@ if ($row = DB::fetch($res)) {
 		)
 	);
 	$userId = DB::getInsertedId();
+
+	require_once dirname(__DIR__).'/vendor/autoload.php';
+
+	$transport = (new Swift_SmtpTransport('ssl://smtp.yandex.ru', 465))
+		->setUsername('lofttestmail@yandex.ru')
+		->setPassword('qwerty7890');
+
+	$mailer = new Swift_Mailer($transport);
+
+	$message = (new Swift_Message('Зарегистрирован новый пользователь'))
+		->setFrom(['lofttestmail@yandex.ru' => 'Burger manager'])
+		->setTo([$_POST['email']])
+		->setBody('Вы зарегестрированы (имя - '.$_POST['name'].', телефон - '.$_POST['phone'].')');
+
+	$result = $mailer->send($message);
 }
 
 $need_change = 0;

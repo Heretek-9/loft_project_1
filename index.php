@@ -515,8 +515,9 @@
       dataType: 'json',
       cache: false,
       success: function(response) {
-        $('#order-form').closest('.container').find('.section__title').text(response);
-        $('#order-form').closest('.order__form').remove();
+        alert(response);
+        // $('#order-form').closest('.container').find('.section__title').text(response);
+        // $('#order-form').closest('.order__form').remove();
       }
     });
   });
